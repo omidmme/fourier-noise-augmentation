@@ -39,8 +39,6 @@ class AddFourierNoise(object):
         self.norm_type = norm_type
 
     def __call__(self, x):
-        # if type(x) is not torch.Tensor:
-        #    x = transforms.ToTensor()(x)
         c, h, w = x.shape[-3:]
         assert c == 3
         assert h >= 1 or w >= 1
