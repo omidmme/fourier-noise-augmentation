@@ -1,3 +1,6 @@
+"""
+Adapted from https://github.com/gatheluck/FourierHeatmap/blob/v0.1.0/misc/metric.py under MIT license
+"""
 import os
 import sys
 

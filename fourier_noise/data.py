@@ -1,3 +1,6 @@
+"""
+Adapted from https://github.com/gatheluck/FourierHeatmap/blob/v0.1.0/misc/data.py under MIT license
+"""
 import os
 import sys
 

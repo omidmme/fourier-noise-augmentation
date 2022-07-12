@@ -1,3 +1,6 @@
+"""
+Adapted from https://github.com/gatheluck/FourierHeatmap/blob/v0.1.0/fhmap/fourier_heatmap.py under MIT license
+"""
 import os
 import sys
 
@@ -36,7 +39,7 @@ class AddFourierNoise(object):
         self.norm_type = norm_type
 
     def __call__(self, x):
-        #if type(x) is not torch.Tensor:
+        # if type(x) is not torch.Tensor:
         #    x = transforms.ToTensor()(x)
         c, h, w = x.shape[-3:]
         assert c == 3
@@ -85,10 +88,13 @@ class AddFourierNoise(object):
         return fourier_noise
 
 
-def create_fourier_heatmap(model, dataset_builder, h_map_size: int, w_map_size: int, eps: float, norm_type: str, num_samples: int, batch_size: int, num_workers: int, log_dir: str, top_k: int = 1, suffix: str = '', shuffle: bool = False, orator: bool = False, fig_title: str = "", **kwargs):
+def create_fourier_heatmap(model, dataset_builder, h_map_size: int, w_map_size: int, eps: float, norm_type: str,
+                           num_samples: int, batch_size: int, num_workers: int, log_dir: str, top_k: int = 1,
+                           suffix: str = '', shuffle: bool = False, orator: bool = False, fig_title: str = "",
+                           **kwargs):
     """
     Args
-    - model: NN model
+    - exp_model: NN exp_model
     - dataset_builder: DatasetBuilder class object
     - h_map_size: height of Fourier heatmap
     - w_map_size: width of Fourier heatmap
@@ -134,7 +140,8 @@ def create_fourier_heatmap(model, dataset_builder, h_map_size: int, w_map_size: 
                     num_samples = min(num_samples, len(dataset))
                     indices = [i for i in range(num_samples)]
                     dataset = torch.utils.data.Subset(dataset, indices)
-                loader = torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers, pin_memory=True)
+                loader = torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=shuffle,
+                                                     num_workers=num_workers, pin_memory=True)
 
                 with torch.autograd.no_grad():
                     num_correct = 0.0
@@ -173,9 +180,11 @@ def create_fourier_heatmap(model, dataset_builder, h_map_size: int, w_map_size: 
     torch.save(error_matrix, os.path.join(log_dir, 'fhmap_data' + suffix + '.pth'))
     images_list_former_half.extend(images_list_latter_half)
     images_list = list(images_list_former_half)
-    torchvision.utils.save_image(torch.stack(images_list, dim=0), os.path.join(log_dir, 'example_images' + suffix + '.png'), nrow=w_map_size)
+    torchvision.utils.save_image(torch.stack(images_list, dim=0),
+                                 os.path.join(log_dir, 'example_images' + suffix + '.png'), nrow=w_map_size)
     ax = plt.axes()
-    sns.heatmap(error_matrix.numpy(), vmin=0.0, vmax=1.0, cmap="jet", cbar=True, xticklabels=False, yticklabels=False, ax=ax)
+    sns.heatmap(error_matrix.numpy(), vmin=0.0, vmax=1.0, cmap="jet", cbar=True, xticklabels=False, yticklabels=False,
+                ax=ax)
     ax.set_title(fig_title)
     plt.savefig(os.path.join(log_dir, 'fhmap' + suffix + '.png'))
     plt.close('all')  # this is needed for continuous figure generation.
