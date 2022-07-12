@@ -5,7 +5,7 @@ import torchvision.transforms as transforms
 import tqdm
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 from torch.utils.data import DataLoader
-from exp_model.model import ResNet18
+from exp_model.resnet import ResNet18
 from fourier_noise.data import DatasetBuilder
 from fourier_noise.fourier_heatmap import create_fourier_heatmap
 
