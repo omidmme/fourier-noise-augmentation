@@ -130,8 +130,6 @@ def run_experiment(fb_noise, exp_name, heat_map_name):
             transforms.Normalize(mean, std)
         ])
     else:
-        # error_matrix = torch.load("fhmap_data.pth")
-
         train_transform = transforms.Compose([
                                                  transforms.Pad(4),
                                                  transforms.RandomHorizontalFlip(),
