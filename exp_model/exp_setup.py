@@ -149,7 +149,7 @@ def run_experiment(fb_noise, exp_name, heat_map_name):
     val_dataset = DataLoader(val_data, batch_size=100, num_workers=2)  # num_of_GPUS * 4)
     test_dataset = DataLoader(test_data, batch_size=100, shuffle=False, num_workers=2)  # num_of_GPUS * 4)
 
-    if load_weights is True:
+    if load_weights:
         # define weights
         weights = torch.load("PATH")
         model.load_state_dict(weights["exp_model"])
