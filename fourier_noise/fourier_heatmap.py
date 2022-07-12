@@ -94,7 +94,7 @@ def create_fourier_heatmap(model, dataset_builder, h_map_size: int, w_map_size: 
                            **kwargs):
     """
     Args
-    - model: NN exp_model
+    - model: NN model
     - dataset_builder: DatasetBuilder class object
     - h_map_size: height of Fourier heatmap
     - w_map_size: width of Fourier heatmap
